@@ -29,3 +29,89 @@ adjust $H$'s velocity vector. This approach is the slowest and wouldn't work if
 $I$'s velocity is faster than $L$'s velocity. Accordingly, this is a stable but
 slow solution to the problem.
 
+## Interception approach based on the interception point estimation
+
+The travelled distance of a vehicle with constant velocity is calculated by
+
+```math
+x = v t
+```
+
+Thus, the velocity is directly proportional to the travelled distance. In
+mathematic notation:
+
+```math
+\frac{x_1}{x_2} = \frac{v_1 \not{t}}{v_2 \not{t}}
+```
+
+In a first step we assume that $L$ has a constant velocity vector. Thus, $L$ is
+flying straight ahead with constant speed. In this case as stated above, the
+traveled distance is proportional to the speed
+
+```math
+\frac{||\overrightarrow{P_L P_I}||}{||\overrightarrow{P_H P_I}||} =
+\frac{v_L}{v_H}
+```
+
+Let's define the $||\overrightarrow{P_L P_I}||$ and
+$||\overrightarrow{P_H P_I}||$ in dependence of $t$
+
+```math
+\begin{array}{ccl}
+||\overrightarrow{P_L P_I}|| & = & ||\vec{v}_L t|| \\
+||\overrightarrow{P_H P_I}|| & = & ||\vec{v}_L t + \overrightarrow{P_H P_L}||
+\end{array}
+```
+
+Inserting the above equations into the previous equation we can build a
+binomial.
+
+```math
+\begin{array}{ccl}
+\frac{v_L}{v_H} & = & \frac{||\vec{v}_L t||}{||\vec{v}_L t + \overrightarrow{P_H
+P_L}||} \\
+\frac{v_L^2}{v_H^2} & = & \frac{u_L^2 t^2 + w_L^2 t^2}{(u_L t + x_L - x_H)^2 +
+(w_L t + y_L - y_H)^2} \\
+\frac{v_L^2}{v_H^2} & = & \frac{u_L^2 t^2 + w_L^2 t^2}{u_L^2 t^2 + 2 u_L x_L t -
+2 u_L x_H t + x_L^2 - 2 x_L x_H + x_H^2 + w_L^2 t^2 + 2 w_L y_L t - 2 w_L y_H t
++ y_L^2 - 2 y_L y_H + y_H^2} \\
+\frac{v_L^2}{v_H^2} & = & \frac{(u_L^2 + w_L^2) t^2}{(u_L^2 + w_L^2) t^2 + (2
+u_L x_L - 2 u_L x_H + 2 w_L y_L - 2 w_L y_H) t + x_L^2 - 2 x_L x_H + x_H^2 +
+y_L^2 - 2 y_L y_H + y_H^2} \\
+v_H^2(u_L^2 + w_L^2) t^2 & = & v_L^2 ((u_L^2 + w_L^2) t^2 \\
+& & + (2 u_L x_L - 2 u_L x_H + 2 w_L y_L - 2 w_L y_H) t \\
+& & + x_L^2 - 2 x_L x_H + x_H^2 + y_L^2 - 2 y_L y_H + y_H^2) \\
+v_H^2 \not{v_L^2} t^2 & = & \not{v_L^2} (v_L^2 t^2 \\
+& & + (2 u_L x_L - 2 u_L x_H + 2 w_L y_L - 2 w_L y_H) t \\
+& & + x_L^2 - 2 x_L x_H + x_H^2 + y_L^2 - 2 y_L y_H + y_H^2) \\
+0 & = & (v_H^2 - v_L^2) t^2 \\
+& & + (2 u_L x_H - 2 u_L x_L + 2 w_L y_H - 2 w_L y_L) t \\
+& & - x_L^2 2 x_L x_H - x_H^2 - y_L^2 + 2 y_L y_H - y_H^2
+\end{array}
+```
+
+We can solve the binomial using the quadratic function.
+
+```math
+t_{1, 2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+```
+
+where
+
+```math
+\begin{array}{ccl}
+a & = & v_H^2 - v_L^2 \\
+b & = & 2 u_L x_H - 2 u_L x_L + 2 w_L y_H - 2 w_L y_L \\
+c & = & - x_L^2 + 2 x_L x_H - x_H^2 - y_L^2 + 2 y_L y_H - y_H^2
+\end{array}
+```
+
+The quadratic function will give us two solutions. However, we only need the
+positive one. Thus, $t = |t_{1, 2}|$.
+
+Now, that we have an estimation of the interception point we can directly fly
+towards it to intercept at the as soon as possible. However, we assumed that the
+intercepted aircraft does not change direction nor speed. In the next section
+we will see how we account for that.
+
+## Interception with adaptive adjustments
