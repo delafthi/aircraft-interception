@@ -29,6 +29,22 @@ adjust $H$'s velocity vector. This approach is the slowest and wouldn't work if
 $I$'s velocity is faster than $L$'s velocity. Accordingly, this is a stable but
 slow solution to the problem.
 
+### Example Animation
+
+Adjustable parameters in the file `trivialInterception.py`:
+
+- `pos_H`: starting position of the hunter
+- `vel_H`: velocity of the hunter. Only the norm is relevant not the direction
+- `pos_L`: starting position of the liner
+- `vel_H`: starting velocity vector of the liner
+- `t_step`: Size of the time steps
+- `update_vel()` function: A function which updates the velocity vector of the
+  liner over time. Currently, randomly rotate the vector between [-pi/4, pi/4]
+
+```bash
+manim -pqh trivialInterception.py trivialInterception
+```
+
 ## Interception approach based on the interception point estimation
 
 The travelled distance of a vehicle with constant velocity is calculated by
