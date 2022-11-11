@@ -143,7 +143,8 @@ Adjustable parameters in the file `interceptionPointEstimation.py`:
   account. 0 means we basicaly have the trivial approach. 1 means we always
   drive directly to the estimated interception point
 - `update_vel()` function: A function which updates the velocity vector of the
-  liner over time. Currently, randomly rotate the vector between [-pi/4, pi/4]
+  liner over time. Currently, randomly rotate the vector between
+  $[\frac{-\pi}{4}, \frac{\pi}{4}]$
 
 ```bash
 manim -pqh interceptionPointEstimation.py interceptionPointEstimation
