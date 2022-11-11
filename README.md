@@ -130,4 +130,21 @@ towards it to intercept at the as soon as possible. However, we assumed that the
 intercepted aircraft does not change direction nor speed. In the next section
 we will see how we account for that.
 
-## Interception with adaptive adjustments
+### Example:
+
+Adjustable parameters in the file `interceptionPointEstimation.py`:
+
+- `pos_H`: starting position of the hunter
+- `vel_H`: velocity of the hunter. Only the norm is relevant not the direction
+- `pos_L`: starting position of the liner
+- `vel_H`: starting velocity vector of the liner
+- `t_step`: Size of the time steps
+- `k`: Factor of how much the estimated interception point is taken into
+  account. 0 means we basicaly have the trivial approach. 1 means we always
+  drive directly to the estimated interception point
+- `update_vel()` function: A function which updates the velocity vector of the
+  liner over time. Currently, randomly rotate the vector between [-pi/4, pi/4]
+
+```bash
+manim -pqh interceptionPointEstimation.py interceptionPointEstimation
+```
